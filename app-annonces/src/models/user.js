@@ -1,6 +1,6 @@
 const { Model } = require ('sequelize');
 
-module.exports = (sequelize, DataTypes) => {
+const User = (sequelize, DataTypes) => {
     class User extends Model {
         static associate(model) {
             this.hasMany(model.Annonce, {
@@ -30,3 +30,5 @@ module.exports = (sequelize, DataTypes) => {
 
     return User;
 }
+
+module.exports = User;
