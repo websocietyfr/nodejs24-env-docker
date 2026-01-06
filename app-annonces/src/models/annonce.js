@@ -18,7 +18,8 @@ const Annonce = (sequelize, DataTypes) => {
         filepath: DataTypes.TEXT,
         status: {
             type: DataTypes.ENUM,
-            values: ['draft', 'published', 'suspended']
+            values: ['draft', 'published', 'suspended'],
+            defaultValue: 'draft'
         }
     }, {
         sequelize,
