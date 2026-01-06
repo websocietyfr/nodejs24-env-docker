@@ -2,8 +2,8 @@ const { Model, DataTypes } = require('sequelize');
 
 const Annonce = (sequelize, DataTypes) => {
     class Annonce extends Model {
-        // implementation des jointures
-        static associate(models) {}
+        // implementation des jointures 
+        // static associate(models) {}
     }
     
     Annonce.init({

@@ -1,11 +1,15 @@
+const { Annonce } = require('../models');
+
 module.exports = {
     getAllAnnonces,
     getAnnonce
 };
 
-function getAllAnnonces(req, res) {
+async function getAllAnnonces(req, res) {
+    const annonces = await Annonce.findAll();
     res.status(200).json({
-        message: 'Mes annonces'
+        message: 'Mes annonces',
+        annonces
     });
 }
 
