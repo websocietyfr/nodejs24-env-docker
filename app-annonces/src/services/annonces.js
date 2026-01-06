@@ -1,22 +1,6 @@
 const { Op } = require('sequelize');
 const { Annonce, dbInstance } = require('../models');
 
-async function getAllAnnonces(req, res) {
-    const annonces = await Annonce.findAll();
-    res.status(200).json({
-        message: "Voici votre liste d'annonces",
-        annonces
-    });
-}
-
-function getAnnonce(req, res) {
-    // req.params.id
-    console.log('id :', req.params.id);
-    res.status(200).json({
-        message: 'Mon annonce',
-        id: req.params.id
-    });
-}
 
 const getAnnonceById = async (req, res) => {
     const id = req.params.id;
