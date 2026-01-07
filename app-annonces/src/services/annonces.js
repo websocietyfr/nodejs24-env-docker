@@ -124,9 +124,7 @@ const deleteAnnonce = async (req, res) => {
 }
 
 module.exports = {
-    getAllAnnonces,
     getAnnonceById,
-    getAnnonce,
     createAnnonce,
     searchAnnonce,
     updateAnnonce,
