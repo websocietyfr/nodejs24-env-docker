@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const { validateAnnonce } = require('../middlewares/annonces');
 const { validateAuthentication } = require('../middlewares/auth');
+const { isAdmin } = require('../middlewares/users');
+
 const { deleteAnnonce, getAnnonceById, createAnnonce, searchAnnonce, updateAnnonce } = require('../services/annonces');
 
 router.get('/', searchAnnonce);
