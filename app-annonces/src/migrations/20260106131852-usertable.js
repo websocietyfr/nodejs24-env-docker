@@ -42,7 +42,7 @@ module.exports = {
         },
         token: {
           type: Sequelize.DataTypes.TEXT,
-          allowNull: false,
+          allowNull: true,
         },
         role: {
           type: Sequelize.DataTypes.ENUM,

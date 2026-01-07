@@ -8,6 +8,11 @@ const User = (sequelize, DataTypes) => {
                 as: 'Annonces'
             })
         }
+
+        clean() {
+            const { password, token, updatedAt, createdAt, ...cleanedUser } = this.dataValues;
+            return cleanedUser;
+        }
     }
 
     User.init({
@@ -24,7 +29,11 @@ const User = (sequelize, DataTypes) => {
             values: ['admin', 'seller'],
             defaultValue: 'seller'
         },
-        username: DataTypes.STRING,
+        username: {
+            type: DataTypes.STRING,
+            unique: true,
+            allowNull: false
+        },
         password: DataTypes.STRING
     }, {
         modelName: 'User',
