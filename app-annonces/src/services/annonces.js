@@ -1,6 +1,7 @@
 const { Op } = require('sequelize');
 const { Annonce, dbInstance } = require('../models');
-
+const { mailer } = require('../utils/mailer');
+require('dotenv').config();
 
 const getAnnonceById = async (req, res) => {
     const id = req.params.id;
@@ -41,16 +42,27 @@ const createAnnonce = async (req, res) => {
 
         // TODO: définition automatique de l'utilisateur auteur après l'authentification
 
+        // notification de l'admin d'une nouvelle annonce publiée
+        const info = await mailer(
+            process.env.MAIL_ADMIN,
+            'Nouvelle Annonce',
+            'Email de confirmation - Une nouvelle annonce à été créer',
+            '<html><h1>Email de confirmation</h1><br><p>Une nouvelle annonce à été créer.</p></html>'
+        );
+        console.log(info);
+
         transaction.commit();
         return res.status(201).json({
             status: "Annonce créer avec succès",
-            annonce
+            annonce,
+            mail_notification: info
         });
     } catch (error) {
         transaction.rollback();
+        const errormsg = (error.name === 'SequelizeDatabaseError') ? error.parent.sqlMessage : error;
         return res.status(400).json({
             status: "Erreur de la création de l'annonce",
-            error
+            message: errormsg
         });
     }
 }
