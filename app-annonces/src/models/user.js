@@ -21,8 +21,11 @@ const User = (sequelize, DataTypes) => {
         token: DataTypes.TEXT,
         role: {
             type: DataTypes.ENUM,
-            values: ['admin', 'seller']
-        }
+            values: ['admin', 'seller'],
+            defaultValue: 'seller'
+        },
+        username: DataTypes.STRING,
+        password: DataTypes.STRING
     }, {
         modelName: 'User',
         sequelize
