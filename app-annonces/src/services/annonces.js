@@ -123,10 +123,23 @@ const deleteAnnonce = async (req, res) => {
     }
 }
 
+const multiplicated = (value1, value2) => {
+    return value1 * value2;
+}
+
+const multiplicate = (req, res, next) => {
+    const [ val1, val2 ] = req.body.items;
+    const result = multiplicated(val1, val2);
+    if(!result) return res.status(400).json({ message: "Format incorrect"});
+    return res.status(200).json({ result });
+}
+
 module.exports = {
     getAnnonceById,
     createAnnonce,
     searchAnnonce,
     updateAnnonce,
-    deleteAnnonce
+    deleteAnnonce,
+    multiplicated,
+    multiplicate
 };
