@@ -6,7 +6,14 @@ require('dotenv').config();
 
 const db = {};
 
-const dbInstance = new Sequelize(`mariadb://${process.env.MARIADB_USERNAME}:${process.env.MARIADB_PASSWORD}@${process.env.MARIADB_HOST}:${process.env.MARIADB_PORT}/${process.env.MARIADB_DATABASE}`);
+const dbInstance = new Sequelize(`mariadb://${process.env.MARIADB_USERNAME}:${process.env.MARIADB_PASSWORD}@${process.env.MARIADB_HOST}:${process.env.MARIADB_PORT}/${process.env.MARIADB_DATABASE}`, {
+  dialect: 'mariadb',
+  dialectOptions: {
+    ssl: {
+      require: true
+    }
+  },
+});
 
 // instanciation des différents modèles.
 fs
