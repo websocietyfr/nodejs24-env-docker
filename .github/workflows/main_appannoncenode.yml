@@ -63,4 +63,27 @@ jobs:
           slot-name: 'Production'
           package: .
 
+      - name: 'Install Sequelize-cli'
+        run: npm install -g sequelize-cli
+
+      - name: 'Execute Migrations'
+        env:
+            MARIADB_HOST: ${{ secrets.MARIADB_HOST }}
+            MARIADB_DATABASE: ${{ secrets.MARIADB_DATABASE }}
+            MARIADB_USERNAME: ${{ secrets.MARIADB_USERNAME }}
+            MARIADB_PASSWORD: ${{ secrets.MARIADB_PASSWORD }}
+            MARIADB_PORT: ${{ secrets.MARIADB_PORT }}
+            NODE_ENV: production
+        run: npx sequelize-cli db:migrate --migrations-path ./src/migrations
+
+      - name: 'Execute Seeders'
+        env:
+            MARIADB_HOST: ${{ secrets.MARIADB_HOST }}
+            MARIADB_DATABASE: ${{ secrets.MARIADB_DATABASE }}
+            MARIADB_USERNAME: ${{ secrets.MARIADB_USERNAME }}
+            MARIADB_PASSWORD: ${{ secrets.MARIADB_PASSWORD }}
+            MARIADB_PORT: ${{ secrets.MARIADB_PORT }}
+            NODE_ENV: production
+        run: npx sequelize-cli db:seed:all --seeders-path ./src/seeders
+
           
